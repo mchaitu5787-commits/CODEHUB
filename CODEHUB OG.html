@@ -1,0 +1,1600 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Code Hub — Programming Database (Black & White)</title>
+
+  <!-- Inter-like font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0b; --card:#0f1724; --muted:#9aa3b2; --accent:#ffffff; --border:#222; --radius:12px;
+      --mono:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--accent); -webkit-font-smoothing:antialiased}
+    .wrap{max-width:1200px;margin:18px auto;padding:20px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 4px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .menu-btn{font-size:20px;border:0;background:transparent;cursor:pointer;color:var(--muted)}
+    .logo{font-weight:700;letter-spacing:-0.2px;color:var(--accent)}
+    nav{display:flex;gap:14px;color:var(--muted);font-size:14px}
+    nav a{color:var(--muted);text-decoration:none}
+    .hero{margin-top:8px;background:linear-gradient(90deg,#071022 0%, #0b1018 100%);padding:18px;border-radius:14px;border:1px solid var(--border);display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+    .title{font-size:22px;font-weight:700;margin:0;color:var(--accent)}
+    .subtitle{color:var(--muted);font-size:13px;margin-top:6px}
+
+    /* Search */
+    .search-row{display:flex;justify-content:center;margin:18px 0}
+    .search{width:100%;max-width:980px;background:var(--card);border-radius:999px;padding:12px 12px;display:flex;gap:8px;align-items:center;border:1px solid var(--border);box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+    .search button.icon{background:transparent;border:0;padding:8px;border-radius:10px;cursor:pointer;font-size:18px;color:var(--muted)}
+    .search input{flex:1;background:transparent;border:0;padding:10px 12px;font-size:16px;outline:none;color:var(--accent)}
+
+    /* mic waves */
+    .mic {display:flex;gap:3px;align-items:end}
+    .mic .bar{width:3px;height:8px;background:var(--accent);animation:bar 1s infinite ease-in-out;transform-origin:bottom}
+    .mic .bar:nth-child(2){animation-delay:.15s}
+    .mic .bar:nth-child(3){animation-delay:.3s}
+    @keyframes bar{0%{transform:scaleY(.4)}50%{transform:scaleY(1)}100%{transform:scaleY(.4)}}
+
+    /* camera unique */
+    .camera-unique{width:36px;height:26px;border-radius:6px;background:var(--accent);display:grid;place-items:center;color:#000;font-weight:700}
+
+    /* languages */
+    .lang-list{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:14px 0}
+    .lang-btn{padding:10px 18px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--accent);cursor:pointer;font-weight:600}
+    .lang-btn:hover{background:var(--accent);color:#000}
+
+    /* meta */
+    .meta-row{display:flex;justify-content:space-between;align-items:center;margin-top:6px;color:var(--muted);font-size:13px}
+
+    /* grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:18px}
+    .card{background:var(--card);border-radius:12px;padding:14px;border:1px solid var(--border);display:flex;flex-direction:column;gap:10px;min-height:110px;transition:transform .12s,box-shadow .12s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(255,255,255,0.02);border-color:#ffffff11}
+    .tag{font-size:11px;padding:6px 8px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--muted);font-weight:600}
+    .title-card{font-weight:700;font-size:15px;margin:0;color:var(--accent)}
+    .desc{color:var(--muted);font-size:13px;margin-top:6px}
+    .cta{margin-top:auto;display:flex;gap:8px;align-items:center}
+    .btn{padding:8px 12px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--accent);cursor:pointer;font-size:13px}
+    .btn.primary{background:var(--accent);color:#000;border:0}
+
+    /* pre (hidden until view) */
+    pre.code-block{background:#07101a;color:#e6eef8;padding:12px;border-radius:8px;font-family:var(--mono);font-size:13px;white-space:pre-wrap;overflow:auto;display:none;margin-top:10px;border:1px solid #1b2833}
+
+    /* modal (not used but kept) */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+
+    /* responsive */
+    @media (max-width:960px){
+      .grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+      .hero{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" aria-live="polite">
+    <header>
+      <div class=<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Logo</title>
+  <style>
+    .logo {
+      max-width: 10%;   /* Makes image scale down on smaller devices */
+      height: auto;      /* Keeps aspect ratio */
+    }
+    body {
+      text-align: center; /* Center align logo */
+      margin: 0;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>CodeHub</h1>
+  
+</html>     </div>
+      <div class="brand">
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+        
+        
+      <div style="display:flex;gap:10px;align-items:center">
+        <div id="userHistoryMeta" style="color:var(--muted);font-size:13px">History</div>
+      </div>
+    </header>
+
+    <section class="hero" aria-labelledby="heroTitle">
+      <div>
+        <h1 id="heroTitle" class="title">Programming Database</h1>
+        <div class="subtitle">History · Syntax · Use cases · Frameworks · Interactive examples</div>
+      </div>
+      <div></div>
+    </section>
+
+    <!-- centered search -->
+    <div class="search-row" role="search">
+      <div class="search" aria-label="Search programs">
+        <button class="icon" id="uploadBtn" title="Upload file or image">＋</button>
+        <input id="searchInput" placeholder="Search Java, Python, C, C++, JavaScript, examples, frameworks..." aria-label="Search programs"/>
+        <button class="icon" id="micBtn" title="Microphone" aria-label="Microphone">
+          <div class="mic" id="micWave" title="Recording waves">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+        </button>
+        <button class="icon" id="camBtn" title="Camera" aria-label="Camera">
+          <div class="camera-unique">📷</div>
+        </button>
+        <button class="icon" id="sendBtn" title="Send" aria-label="Search">➤</button>
+      </div>
+    </div>
+
+    <!-- languages -->
+    <div class="lang-list" id="langList">
+      <button class="lang-btn" data-lang="Java">Java</button>
+      <button class="lang-btn" data-lang="Python">Python</button>
+      <button class="lang-btn" data-lang="C">C</button>
+      <button class="lang-btn" data-lang="C++">C++</button>
+      <button class="lang-btn" data-lang="JavaScript">JavaScript</button>
+      <button onclick="window.open('https://ripple-thought.lovable.app','_blank')"
+      <button class="lang-btn" data-lang="AI">AI</button>
+      <button onclick="window.open('programming_quiz_80_questions_conceptual.html','blank' )"
+      <button class="lang-btn" data-lang="QUIZ">QUIZ</button>
+    </div>
+
+    <div class="meta-row">
+      <div id="resultsMeta">Click a language to view programs</div>
+      <div>• 30 preloaded programs per language</div>
+    </div>
+
+    <div class="grid" id="grid" role="list" aria-live="polite">
+      <!-- Program cards will appear here (populated from HTML below by script) -->
+    </div>
+  </div>
+
+  <!-- ---------- Programs embedded in HTML (150 total) ---------- -->
+  <!-- We'll place them in a hidden container so they are part of HTML as requested -->
+  <div id="programs-html" style="display:none;">
+
+    <!-- ========== Java programs (30) ========== -->
+    <div data-lang="Java" data-idx="1">
+<pre class="original">
+/* Java 1 - Hello World */
+public class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println("Hello, World!");
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="2">
+<pre class="original">
+/* Java 2 - Addition of two numbers */
+import java.util.Scanner;
+public class Add {
+  public static void main(String[] args) {
+    Scanner s = new Scanner(System.in);
+    int a = s.nextInt(), b = s.nextInt();
+    System.out.println(a + b);
+    s.close();
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="3">
+<pre class="original">
+/* Java 3 - Factorial (recursive) */
+public class Factorial {
+  static long fact(int n) { return n <= 1 ? 1 : n * fact(n-1); }
+  public static void main(String[] args) { System.out.println(fact(10)); }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="4">
+<pre class="original">
+/* Java 4 - Fibonacci sequence */
+public class Fib {
+  public static void main(String[] args) {
+    int n = 10, a = 0, b = 1;
+    for (int i = 0; i < n; i++) {
+      System.out.println(a);
+      int t = a + b; a = b; b = t;
+    }
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="5">
+<pre class="original">
+/* Java 5 - Palindrome check */
+public class Palindrome {
+  public static boolean isPal(String s) { return new StringBuilder(s).reverse().toString().equals(s); }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="6">
+<pre class="original">
+/* Java 6 - Prime test */
+public class Prime {
+  public static boolean isPrime(int n) {
+    if (n < 2) return false;
+    for (int i = 2; i * i <= n; i++) if (n % i == 0) return false;
+    return true;
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="7">
+<pre class="original">
+/* Java 7 - Bubble sort */
+public class Bubble {
+  public static void sort(int[] a) {
+    for (int i = 0; i < a.length; i++)
+      for (int j = 0; j + 1 < a.length; j++)
+        if (a[j] > a[j+1]) { int t = a[j]; a[j] = a[j+1]; a[j+1] = t; }
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="8">
+<pre class="original">
+/* Java 8 - Binary search */
+public class BSearch {
+  public static int bs(int[] a, int k) {
+    int l=0,h=a.length-1;
+    while(l<=h){int m=(l+h)/2; if(a[m]==k) return m; if(a[m]<k) l=m+1; else h=m-1;}
+    return -1;
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="9">
+<pre class="original">
+/* Java 9 - Matrix multiplication */
+public class MatMul {
+  public static int[][] mul(int[][] A, int[][] B) {
+    int n=A.length,m=B[0].length,p=B.length; int[][] R=new int[n][m];
+    for(int i=0;i<n;i++) for(int j=0;j<m;j++) for(int k=0;k<p;k++) R[i][j]+=A[i][k]*B[k][j];
+    return R;
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="10">
+<pre class="original">
+/* Java 10 - File read */
+import java.nio.file.*;
+public class FileRead {
+  public static void main(String[] args) throws Exception {
+    System.out.println(new String(Files.readAllBytes(Paths.get("input.txt"))));
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="11">
+<pre class="original">
+/* Java 11 - HashMap example */
+import java.util.*;
+public class MapDemo {
+  public static void main(String[] a) {
+    Map<String,Integer> m = new HashMap<>();
+    m.put("a",1); m.put("b",2); System.out.println(m);
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="12">
+<pre class="original">
+/* Java 12 - Thread example */
+public class ThreadExample {
+  public static void main(String[] args) {
+    Runnable r = () -> System.out.println("running");
+    new Thread(r).start();
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="13">
+<pre class="original">
+/* Java 13 - Exception handling */
+public class Ex {
+  public static void main(String[] a) {
+    try { int x = 1/0; } catch (Exception e) { System.out.println("error"); }
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="14">
+<pre class="original">
+/* Java 14 - Interface demo */
+interface Greeter { void greet(); }
+class Impl implements Greeter { public void greet(){ System.out.println("hi"); } }
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="15">
+<pre class="original">
+/* Java 15 - Inheritance demo */
+class Parent { void p(){ } }
+class Child extends Parent { void c(){ } }
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="16">
+<pre class="original">
+/* Java 16 - Lambda and streams */
+import java.util.*;
+public class StreamDemo {
+  public static void main(String[] a) {
+    Arrays.asList(1,2,3).stream().map(x->x*2).forEach(System.out::println);
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="17">
+<pre class="original">
+/* Java 17 - Regex test */
+import java.util.regex.*;
+public class Reg { public static void main(String[]a){ System.out.println(Pattern.matches("a.*","abc")); } }
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="18">
+<pre class="original">
+/* Java 18 - Command line args */
+public class Args { public static void main(String[] a){ for(String s:a) System.out.println(s); } }
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="19">
+<pre class="original">
+/* Java 19 - Simple CLI input */
+import java.util.*;
+public class CLI { public static void main(String[]a){ Scanner s=new Scanner(System.in); System.out.println(s.nextLine()); s.close(); } }
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="20">
+<pre class="original">
+/* Java 20 - Time demo */
+import java.time.*;
+public class TimeDemo { public static void main(String[] a){ System.out.println(Instant.now()); } }
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="21">
+<pre class="original">
+/* Java 21 - Simple HTTP skeleton */
+import java.net.*;
+import java.io.*;
+public class SimpleHTTP {
+  public static void main(String[] a) throws Exception {
+    ServerSocket ss = new ServerSocket(8080);
+    Socket s = ss.accept();
+    BufferedWriter w = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+    w.write("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nHello");
+    w.flush(); s.close(); ss.close();
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="22">
+<pre class="original">
+/* Java 22 - Map as JSON-like */
+import java.util.*;
+public class JSONLike {
+  public static void main(String[]a){ Map<String,Object> m = new HashMap<>(); m.put("k",123); System.out.println(m); }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="23">
+<pre class="original">
+/* Java 23 - Simple CLI Calculator */
+import java.util.*;
+public class Calc {
+  public static void main(String[]a){
+    Scanner s = new Scanner(System.in);
+    int x = s.nextInt(), y = s.nextInt();
+    System.out.println(x+y);
+    s.close();
+  }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="24">
+<pre class="original">
+/* Java 24 - Stack example */
+import java.util.*;
+public class StackDemo {
+  public static void main(String[]a){ Deque<Integer> st = new ArrayDeque<>(); st.push(1); System.out.println(st.pop()); }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="25">
+<pre class="original">
+/* Java 25 - Queue example */
+import java.util.*;
+public class QueueDemo {
+  public static void main(String[]a){ Queue<Integer> q = new LinkedList<>(); q.add(1); System.out.println(q.poll()); }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="26">
+<pre class="original">
+/* Java 26 - Simple Singleton */
+public class Singleton {
+  private static Singleton s = new Singleton();
+  private Singleton(){}
+  public static Singleton get(){ return s; }
+}
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="27">
+<pre class="original">
+/* Java 27 - Properties example */
+import java.util.*;
+public class Props { public static void main(String[]a){ Properties p=new Properties(); p.put("k","v"); System.out.println(p.get("k")); } }
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="28">
+<pre class="original">
+/* Java 28 - Simple regex replace */
+public class Repl { public static void main(String[]a){ System.out.println("abc".replaceAll("a","x")); } }
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="29">
+<pre class="original">
+/* Java 29 - Convert array to string */
+import java.util.*;
+public class ArrToStr { public static void main(String[]a){ int[] arr={1,2,3}; System.out.println(Arrays.toString(arr)); } }
+</pre>
+    </div>
+
+    <div data-lang="Java" data-idx="30">
+<pre class="original">
+/* Java 30 - Simple comparator sort */
+import java.util.*;
+public class SortBy {
+  public static void main(String[]a){
+    List<String> l = Arrays.asList("b","a","c");
+    l.sort(Comparator.naturalOrder());
+    System.out.println(l);
+  }
+}
+</pre>
+    </div>
+
+    <!-- ========== Python programs (30) ========== -->
+    <div data-lang="Python" data-idx="1">
+<pre class="original">
+# Python 1 - Hello World
+print("Hello, World!")
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="2">
+<pre class="original">
+# Python 2 - Addition
+a = int(input()); b = int(input()); print(a + b)
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="3">
+<pre class="original">
+# Python 3 - Factorial (recursive)
+def fact(n): return 1 if n<2 else n*fact(n-1)
+print(fact(5))
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="4">
+<pre class="original">
+# Python 4 - Fibonacci
+def fib(n):
+  a,b=0,1
+  for _ in range(n):
+    print(a); a,b=b,a+b
+fib(10)
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="5">
+<pre class="original">
+# Python 5 - Palindrome
+s = input().strip()
+print(s == s[::-1])
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="6">
+<pre class="original">
+# Python 6 - Prime
+n = int(input())
+is_prime = n>1 and all(n%i for i in range(2,int(n**0.5)+1))
+print(is_prime)
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="7">
+<pre class="original">
+# Python 7 - Bubble sort
+a=[3,1,2]
+for i in range(len(a)):
+  for j in range(len(a)-1):
+    if a[j]>a[j+1]: a[j],a[j+1]=a[j+1],a[j]
+print(a)
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="8">
+<pre class="original">
+# Python 8 - Binary search
+def bs(a,k):
+  l,h=0,len(a)-1
+  while l<=h:
+    m=(l+h)//2
+    if a[m]==k: return m
+    if a[m]<k: l=m+1
+    else: h=m-1
+  return -1
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="9">
+<pre class="original">
+# Python 9 - Matrix multiply
+A=[[1,2],[3,4]]; B=[[5,6],[7,8]]
+R=[[sum(A[i][k]*B[k][j] for k in range(2)) for j in range(2)] for i in range(2)]
+print(R)
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="10">
+<pre class="original">
+# Python 10 - File IO
+open("out.txt","w").write("hello")
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="11">
+<pre class="original">
+# Python 11 - Map example
+d={"a":1,"b":2}; print(d)
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="12">
+<pre class="original">
+# Python 12 - Threading
+import threading
+def f(): print("hi")
+t=threading.Thread(target=f); t.start(); t.join()
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="13">
+<pre class="original">
+# Python 13 - Regex
+import re
+print(bool(re.match(r"a.*","abc")))
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="14">
+<pre class="original">
+# Python 14 - Args
+import sys
+print(sys.argv)
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="15">
+<pre class="original">
+# Python 15 - List comprehension
+print([x*x for x in range(10)])
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="16">
+<pre class="original">
+# Python 16 - GCD
+import math
+print(math.gcd(48,18))
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="17">
+<pre class="original">
+# Python 17 - Swap
+a,b=5,10
+a,b=b,a
+print(a,b)
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="18">
+<pre class="original">
+# Python 18 - Date/time
+import time
+print(time.time())
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="19">
+<pre class="original">
+# Python 19 - JSON demo
+import json
+print(json.dumps({"k":1}))
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="20">
+<pre class="original">
+# Python 20 - Simple web server
+import http.server, socketserver
+Handler = http.server.SimpleHTTPRequestHandler
+with socketserver.TCPServer(("",8000), Handler) as httpd:
+  print("serving"); httpd.handle_request()
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="21">
+<pre class="original">
+# Python 21 - CSV read
+import csv
+with open('f.csv') as f:
+  for r in csv.reader(f): print(r)
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="22">
+<pre class="original">
+# Python 22 - Dict filter
+d={'a':1,'b':2}
+print({k:v for k,v in d.items() if v>1})
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="23">
+<pre class="original">
+# Python 23 - Lambda map
+print(list(map(lambda x:x*2,[1,2,3])))
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="24">
+<pre class="original">
+# Python 24 - Set example
+s=set([1,2,2,3]); print(s)
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="25">
+<pre class="original">
+# Python 25 - Exception
+try: 1/0
+except Exception as e: print('err')
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="26">
+<pre class="original">
+# Python 26 - JSON load
+import json
+print(json.loads('{"k":1}'))
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="27">
+<pre class="original">
+# Python 27 - Decorator
+def deco(f): return f
+@deco
+def g(): return 1
+print(g())
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="28">
+<pre class="original">
+# Python 28 - Generator
+def gen(n):
+  i=0
+  while i<n:
+    yield i; i+=1
+for x in gen(3): print(x)
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="29">
+<pre class="original">
+# Python 29 - Simple class
+class P:
+  def __init__(self,v): self.v=v
+print(P(5).v)
+</pre>
+    </div>
+
+    <div data-lang="Python" data-idx="30">
+<pre class="original">
+# Python 30 - Socket minimal
+import socket
+s=socket.socket(); s.bind(('localhost',0)); s.close()
+</pre>
+    </div>
+
+    <!-- ========== C programs (30) ========== -->
+    <div data-lang="C" data-idx="1">
+<pre class="original">
+/* C 1 - Hello World */
+#include <stdio.h>
+int main(){ printf("Hello, World!\n"); return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="2">
+<pre class="original">
+/* C 2 - Add two numbers */
+#include <stdio.h>
+int main(){ int a,b; scanf("%d%d",&a,&b); printf("%d\n", a+b); return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="3">
+<pre class="original">
+/* C 3 - Factorial */
+#include <stdio.h>
+long fact(int n){ return n<=1?1:n*fact(n-1); }
+int main(){ printf("%ld\n", fact(5)); return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="4">
+<pre class="original">
+/* C 4 - Fibonacci */
+#include <stdio.h>
+int main(){ int a=0,b=1,i; for(i=0;i<10;i++){ printf("%d\n",a); int t=a+b; a=b; b=t; } return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="5">
+<pre class="original">
+/* C 5 - Palindrome */
+#include <stdio.h>
+#include <string.h>
+int main(){ char s[100]; scanf("%s", s); char r[100]; strcpy(r,s); strrev(r); printf("%d\n", strcmp(s,r)==0); }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="6">
+<pre class="original">
+/* C 6 - Prime */
+#include <stdio.h>
+int isprime(int n){ if(n<2) return 0; for(int i=2;i*i<=n;i++) if(n%i==0) return 0; return 1; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="7">
+<pre class="original">
+/* C 7 - Bubble sort */
+#include <stdio.h>
+int main(){ int a[]={3,1,2},n=3; for(int i=0;i<n;i++) for(int j=0;j<n-1;j++) if(a[j]>a[j+1]){ int t=a[j]; a[j]=a[j+1]; a[j+1]=t; } return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="8">
+<pre class="original">
+/* C 8 - Binary search */
+int bs(int *a,int n,int k){ int l=0,h=n-1; while(l<=h){ int m=(l+h)/2; if(a[m]==k) return m; if(a[m]<k) l=m+1; else h=m-1; } return -1; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="9">
+<pre class="original">
+/* C 9 - Matrix add */
+#include <stdio.h>
+int main(){ int A[2][2]={{1,2},{3,4}}, B[2][2]={{5,6},{7,8}}, R[2][2]; for(int i=0;i<2;i++) for(int j=0;j<2;j++) R[i][j]=A[i][j]+B[i][j]; return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="10">
+<pre class="original">
+/* C 10 - File IO */
+#include <stdio.h>
+int main(){ FILE *f = fopen("t.txt","w"); fprintf(f,"hi"); fclose(f); return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="11">
+<pre class="original">
+/* C 11 - GCD */
+int gcd(int a,int b){ return b==0?a:gcd(b,a%b); }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="12">
+<pre class="original">
+/* C 12 - Swap using XOR */
+void swap(int *a,int *b){ if(a!=b){ *a ^= *b; *b ^= *a; *a ^= *b; } }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="13">
+<pre class="original">
+/* C 13 - Command line args */
+#include <stdio.h>
+int main(int argc, char **argv){ for(int i=0;i<argc;i++) printf("%s\n", argv[i]); return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="14">
+<pre class="original">
+/* C 14 - Time */
+#include <stdio.h>
+#include <time.h>
+int main(){ printf("%ld\n", time(NULL)); return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="15">
+<pre class="original">
+/* C 15 - Struct list */
+#include <stdio.h>
+struct Node{ int v; struct Node *next; };
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="16">
+<pre class="original">
+/* C 16 - Socket skeleton */
+#include <sys/socket.h>
+/* socket code omitted for brevity */
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="17">
+<pre class="original">
+/* C 17 - Regex note */
+#include <regex.h>
+/* demonstration placeholder for regex usage in C */
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="18">
+<pre class="original">
+/* C 18 - Memory allocation */
+#include <stdlib.h>
+int main(){ int *p = malloc(10 * sizeof(int)); free(p); return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="19">
+<pre class="original">
+/* C 19 - Linear search */
+int linear(int *a,int n,int k){ for(int i=0;i<n;i++) if(a[i]==k) return i; return -1; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="20">
+<pre class="original">
+/* C 20 - Simple HTTP text */
+#include <stdio.h>
+int main(){ puts("HTTP/1.1 200 OK\nContent-Type: text/plain\n\nHello"); return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="21">
+<pre class="original">
+/* C 21 - Pointer demo */
+#include <stdio.h>
+int main(){ int x=5; int *p=&x; printf("%d\n", *p); return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="22">
+<pre class="original">
+/* C 22 - Dynamic 2D array */
+#include <stdlib.h>
+int main(){ int **a = malloc(3*sizeof(int*)); for(int i=0;i<3;i++) a[i]=malloc(3*sizeof(int)); return 0; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="23">
+<pre class="original">
+/* C 23 - String length */
+#include <string.h>
+int slen(char *s){ return strlen(s); }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="24">
+<pre class="original">
+/* C 24 - Factorial iterative */
+long fact_it(int n){ long r=1; for(int i=2;i<=n;i++) r*=i; return r; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="25">
+<pre class="original">
+/* C 25 - Swap function */
+void swap2(int *a,int *b){ int t=*a; *a=*b; *b=t; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="26">
+<pre class="original">
+/* C 26 - Max in array */
+int max(int *a,int n){ int m=a[0]; for(int i=1;i<n;i++) if(a[i]>m) m=a[i]; return m; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="27">
+<pre class="original">
+/* C 27 - Min in array */
+int minarr(int *a,int n){ int m=a[0]; for(int i=1;i<n;i++) if(a[i]<m) m=a[i]; return m; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="28">
+<pre class="original">
+/* C 28 - Average */
+double avg(int *a,int n){ double s=0; for(int i=0;i<n;i++) s+=a[i]; return s/n; }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="29">
+<pre class="original">
+/* C 29 - Print array */
+void printarr(int *a,int n){ for(int i=0;i<n;i++) printf("%d ",a[i]); }
+</pre>
+    </div>
+
+    <div data-lang="C" data-idx="30">
+<pre class="original">
+/* C 30 - Simple macro */
+#define SQR(x) ((x)*(x))
+</pre>
+    </div>
+
+    <!-- ========== C++ programs (30) ========== -->
+    <div data-lang="C++" data-idx="1">
+<pre class="original">
+// C++ 1 - Hello
+#include <iostream>
+int main(){ std::cout << "Hello" << std::endl; }
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="2">
+<pre class="original">
+// C++ 2 - Add
+#include <iostream>
+int main(){ int a,b; std::cin>>a>>b; std::cout<<a+b; }
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="3">
+<pre class="original">
+// C++ 3 - Factorial
+long fact(long n){ return n<=1?1:n*fact(n-1); }
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="4">
+<pre class="original">
+// C++ 4 - Fibonacci
+#include <iostream>
+int main(){ int a=0,b=1; for(int i=0;i<10;i++){ std::cout<<a<<"\n"; int t=a+b;a=b;b=t; } }
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="5">
+<pre class="original">
+// C++ 5 - Vector usage
+#include <vector>
+#include <algorithm>
+std::vector<int> v = {3,1,2}; std::sort(v.begin(), v.end());
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="6">
+<pre class="original">
+// C++ 6 - Lambda
+auto f = [](int x){ return x*x; };
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="7">
+<pre class="original">
+// C++ 7 - Thread
+#include <thread>
+void run(){ std::cout << "hi\n"; }
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="8">
+<pre class="original">
+// C++ 8 - Map
+#include <map>
+std::map<std::string,int> m;
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="9">
+<pre class="original">
+// C++ 9 - Class example
+class Point { public: int x,y; Point(int a,int b):x(a),y(b){} };
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="10">
+<pre class="original">
+// C++ 10 - Exception
+try { throw std::runtime_error("err"); } catch(...) {}
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="11">
+<pre class="original">
+// C++ 11 - File IO
+#include <fstream>
+std::ofstream("t.txt") << "hi";
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="12">
+<pre class="original">
+// C++ 12 - Regex
+#include <regex>
+std::regex r("a.*");
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="13">
+<pre class="original">
+// C++ 13 - Binary search
+#include <algorithm>
+int pos = std::binary_search(v.begin(), v.end(), 2);
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="14">
+<pre class="original">
+// C++ 14 - GCD (C++17)
+#include <numeric>
+int g = std::gcd(20,8);
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="15">
+<pre class="original">
+// C++ 15 - Swap
+int a=5,b=10; std::swap(a,b);
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="16">
+<pre class="original">
+// C++ 16 - Matrix multiply (sketch)
+std::vector<std::vector<int>> mul(...);
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="17">
+<pre class="original">
+// C++ 17 - Polymorphism
+struct Base{ virtual void f(){} }; struct D:Base{ void f() override{} };
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="18">
+<pre class="original">
+// C++ 18 - Inheritance
+class Parent{}; class Child: public Parent{};
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="19">
+<pre class="original">
+// C++ 19 - Smart pointer
+#include <memory>
+auto p = std::make_unique<int>(5);
+</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="20">
+<pre class="original">// C++ 20 - Chrono
+#include <chrono>
+auto now = std::chrono::system_clock::now();</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="21">
+<pre class="original">// C++ 21 - STL accumulate
+#include <numeric>
+int s = std::accumulate(v.begin(), v.end(), 0);</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="22">
+<pre class="original">// C++ 22 - Unique ptr
+#include <memory>
+std::unique_ptr<int> p2 = std::make_unique<int>(10);</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="23">
+<pre class="original">// C++ 23 - Shared ptr
+#include <memory>
+std::shared_ptr<int> sp = std::make_shared<int>(5);</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="24">
+<pre class="original">// C++ 24 - Move semantics
+#include <utility>
+std::string s1="a"; std::string s2 = std::move(s1);</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="25">
+<pre class="original">// C++ 25 - Range for
+for(auto &x : v) std::cout<<x;</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="26">
+<pre class="original">// C++ 26 - constexpr
+constexpr int sq(int x){ return x*x; }</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="27">
+<pre class="original">// C++ 27 - Optional (C++17)
+#include <optional>
+std::optional<int> o = 5;</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="28">
+<pre class="original">// C++ 28 - Tuple
+#include <tuple>
+auto t = std::make_tuple(1, "a");</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="29">
+<pre class="original">// C++ 29 - Mutex
+#include <mutex>
+std::mutex mtx;</pre>
+    </div>
+
+    <div data-lang="C++" data-idx="30">
+<pre class="original">// C++ 30 - Condition variable
+#include <condition_variable>
+std::condition_variable cv;</pre>
+    </div>
+
+    <!-- ========== JavaScript programs (30) ========== -->
+    <div data-lang="JavaScript" data-idx="1">
+<pre class="original">
+// JS 1 - Hello
+console.log("Hello, World!");
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="2">
+<pre class="original">
+// JS 2 - Add
+const a = parseInt(prompt("a")), b = parseInt(prompt("b")); console.log(a+b);
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="3">
+<pre class="original">
+// JS 3 - Factorial
+function fact(n){ return n<=1?1:n*fact(n-1); } console.log(fact(5));
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="4">
+<pre class="original">
+// JS 4 - Fibonacci
+let a=0,b=1; for(let i=0;i<10;i++){ console.log(a); [a,b]=[b,a+b]; }
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="5">
+<pre class="original">
+// JS 5 - Palindrome
+const s = "madam"; console.log(s === s.split("").reverse().join(""));
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="6">
+<pre class="original">
+// JS 6 - Prime
+function isPrime(n){ if(n<2) return false; for(let i=2;i*i<=n;i++) if(n%i===0) return false; return true; }
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="7">
+<pre class="original">
+// JS 7 - Sort
+[3,1,2].sort((x,y)=>x-y);
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="8">
+<pre class="original">
+// JS 8 - Binary search
+function bs(a,k){ let l=0,h=a.length-1; while(l<=h){ let m=(l+h)>>1; if(a[m]==k) return m; if(a[m]<k) l=m+1; else h=m-1; } return -1; }
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="9">
+<pre class="original">
+// JS 9 - Map demo
+const m = new Map(); m.set("a",1);
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="10">
+<pre class="original">
+// JS 10 - Promise
+new Promise(resolve=>resolve("ok")).then(console.log);
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="11">
+<pre class="original">
+// JS 11 - Fetch demo
+fetch("/").then(r=>r.text()).then(console.log);
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="12">
+<pre class="original">
+// JS 12 - LocalStorage
+localStorage.setItem("x","1");
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="13">
+<pre class="original">
+// JS 13 - Date
+console.log(Date.now());
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="14">
+<pre class="original">
+// JS 14 - Regex
+console.log(/a.*/.test("abc"));
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="15">
+<pre class="original">
+// JS 15 - Reduce
+console.log([1,2,3].reduce((s,x)=>s+x,0));
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="16">
+<pre class="original">
+// JS 16 - Class
+class N{ constructor(v){ this.v=v; } }
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="17">
+<pre class="original">
+// JS 17 - Async/await
+async function f(){ return await Promise.resolve(1); }
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="18">
+<pre class="original">
+// JS 18 - Event handler
+document.addEventListener("click", ()=>{});
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="19">
+<pre class="original">
+// JS 19 - JSON
+console.log(JSON.stringify({k:1}));
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="20">
+<pre class="original">
+// JS 20 - Simple server (node)
+const http = require('http');
+http.createServer((req,res)=>{ res.end('ok'); }).listen(8080);
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="21">
+<pre class="original">
+// JS 21 - Debounce
+function debounce(fn,ms){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a),ms); } }
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="22">
+<pre class="original">
+// JS 22 - Throttle
+function throttle(fn,ms){ let last=0; return (...a)=>{ let now=Date.now(); if(now-last>ms){ fn(...a); last=now; } } }
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="23">
+<pre class="original">
+// JS 23 - Deep clone
+const deep = obj => JSON.parse(JSON.stringify(obj));
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="24">
+<pre class="original">
+// JS 24 - Merge arrays
+const merged = [...[1,2], ...[3,4]];
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="25">
+<pre class="original">
+// JS 25 - Promise.all
+Promise.all([Promise.resolve(1), Promise.resolve(2)]).then(console.log);
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="26">
+<pre class="original">
+// JS 26 - Map filter
+const arr=[1,2,3].map(x=>x*2);
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="27">
+<pre class="original">
+// JS 27 - Set example
+const s = new Set([1,2,2]);
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="28">
+<pre class="original">
+// JS 28 - Window location
+console.log(window.location.href);
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="29">
+<pre class="original">
+// JS 29 - Clipboard write
+navigator.clipboard?.writeText('hi');
+</pre>
+    </div>
+
+    <div data-lang="JavaScript" data-idx="30">
+<pre class="original">
+// JS 30 - FormData
+const fd = new FormData(); fd.append('k','v');
+</pre>
+    </div>
+
+  </div>
+  <!-- ---------- end embedded programs ---------- -->
+
+  <script>
+    // Helper: escape for insert into DOM (we will use innerText for safety)
+    function sanitizeText(s){ return s; }
+
+    // Build the grid of titles only — code blocks are already in HTML (hidden).
+    const grid = document.getElementById('grid');
+    const programsHtml = document.getElementById('programs-html');
+    const searchInput = document.getElementById('searchInput');
+    const resultsMeta = document.getElementById('resultsMeta');
+    const micBtn = document.getElementById('micBtn');
+    const camBtn = document.getElementById('camBtn');
+
+    // Collect all embedded program entries into a map keyed by lang
+    const embedded = {}; // { lang: [ {idx, codeText, title} ] }
+    document.querySelectorAll('#programs-html > div').forEach(div=>{
+      const lang = div.getAttribute('data-lang');
+      const idx = parseInt(div.getAttribute('data-idx'),10);
+      const pre = div.querySelector('pre.original');
+      const codeText = pre ? pre.textContent : '';
+      // derive a short title (first comment or first line)
+      let title = '';
+      const lines = codeText.split('\n').map(l=>l.trim()).filter(Boolean);
+      if(lines.length){
+        if(lines[0].startsWith('//') || lines[0].startsWith('/*') || lines[0].startsWith('#')){
+          title = lines[0].replace(/^\/\//,'').replace(/^\/\*/,'').replace(/^#/,'').replace(/\*\/$/,'').trim();
+        } else {
+          title = lines[0].slice(0,80);
+        }
+      } else {
+        title = `${lang} Program ${idx}`;
+      }
+      if(!embedded[lang]) embedded[lang]=[];
+      embedded[lang].push({ idx, codeText, title });
+    });
+
+    // sort each list by idx
+    Object.keys(embedded).forEach(k=> embedded[k].sort((a,b)=>a.idx-b.idx));
+
+    // Wire language buttons
+    document.querySelectorAll('.lang-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const lang = btn.getAttribute('data-lang');
+        showLanguage(lang);
+      });
+    });
+
+    let currentLang = null;
+    function showLanguage(lang){
+      currentLang = lang;
+      grid.innerHTML = '';
+      const list = embedded[lang] || [];
+      resultsMeta.textContent = `Showing ${list.length} programs (${lang}). Click "View Code" to reveal code.`;
+      list.forEach(item=>{
+        const card = document.createElement('div');
+        card.className = 'card';
+        // card content: tag, title, desc (short), buttons
+        const tag = document.createElement('div'); tag.className='tag'; tag.innerText = lang;
+        const title = document.createElement('div'); title.className='title-card'; title.innerText = item.title;
+        const desc = document.createElement('div'); desc.className='desc'; desc.innerText = (item.codeText.split('\n').map(l=>l.trim()).filter(Boolean)[0] || '').slice(0,140);
+        const metaDiv = document.createElement('div'); metaDiv.className='meta';
+        const left = document.createElement('div'); left.style.display='flex'; left.style.gap='10px'; left.style.alignItems='center';
+        left.appendChild(tag);
+        const inner = document.createElement('div'); inner.appendChild(title); inner.appendChild(desc);
+        left.appendChild(inner);
+        const right = document.createElement('div'); right.style.textAlign='right'; right.style.fontSize='12px'; right.style.color='var(--muted)'; right.innerText = item.idx;
+        metaDiv.appendChild(left); metaDiv.appendChild(right);
+
+        const cta = document.createElement('div'); cta.className='cta';
+        const viewBtn = document.createElement('button'); viewBtn.className='btn'; viewBtn.innerText='View Code';
+        viewBtn.setAttribute('data-id', `${lang}-${item.idx}`);
+        const copyBtn = document.createElement('button'); copyBtn.className='btn'; copyBtn.innerText='Copy';
+        copyBtn.setAttribute('data-copy', `${lang}-${item.idx}`);
+        cta.appendChild(viewBtn); cta.appendChild(copyBtn);
+
+        // create placeholder for code block (will inject original code only when clicked)
+        const codeBlock = document.createElement('pre');
+        codeBlock.className = 'code-block';
+        codeBlock.setAttribute('data-id','code-'+lang+'-'+item.idx);
+
+        // assemble card
+        card.appendChild(metaDiv);
+        card.appendChild(cta);
+        card.appendChild(codeBlock);
+
+        // hover highlight pointer style
+        card.style.cursor = 'default';
+
+        grid.appendChild(card);
+      });
+    }
+
+    // Event delegation for view & copy
+    grid.addEventListener('click', (e)=>{
+      const viewBtn = e.target.closest('button[data-id]');
+      const copyBtn = e.target.closest('button[data-copy]');
+      if(viewBtn){
+        const id = viewBtn.getAttribute('data-id'); // format "Lang-idx"
+        const [lang, idxStr] = id.split('-');
+        const idx = parseInt(idxStr,10);
+        // find embedded code
+        const list = embedded[lang] || [];
+        const it = list.find(x=>x.idx===idx);
+        if(!it) return;
+        // find codeBlock element
+        const codeBlock = viewBtn.parentElement.nextElementSibling;
+        if(!codeBlock) return;
+        // If code not yet inserted, insert original code text into codeBlock and show
+        if(codeBlock.innerText.trim()===''){
+          codeBlock.innerText = it.codeText.trim();
+          codeBlock.style.display = 'block';
+          // scroll into view a bit
+          codeBlock.scrollIntoView({behavior:'smooth', block:'center'});
+        } else {
+          // toggle display
+          codeBlock.style.display = codeBlock.style.display === 'block' ? 'none' : 'block';
+        }
+      } else if(copyBtn){
+        const id = copyBtn.getAttribute('data-copy');
+        const [lang, idxStr] = id.split('-');
+        const idx = parseInt(idxStr,10);
+        const list = embedded[lang] || [];
+        const it = list.find(x=>x.idx===idx);
+        if(!it) return;
+        navigator.clipboard.writeText(it.codeText.trim()).then(()=> alert('Code copied to clipboard'));
+      }
+    });
+
+    // Search within current language titles & code
+    searchInput.addEventListener('input', (e)=>{
+      const q = e.target.value.trim().toLowerCase();
+      document.getElementById('userHistoryMeta').innerText = q ? `Searched: "${q}"` : 'No recent search';
+      if(!currentLang) return;
+      grid.innerHTML = '';
+      const list = embedded[currentLang].filter(it=>{
+        return it.title.toLowerCase().includes(q) || it.codeText.toLowerCase().includes(q);
+      });
+      resultsMeta.textContent = `Showing ${list.length} programs (${currentLang})`;
+      list.forEach(item=>{
+        const card = document.createElement('div');
+        card.className = 'card';
+        const tag = document.createElement('div'); tag.className='tag'; tag.innerText = currentLang;
+        const title = document.createElement('div'); title.className='title-card'; title.innerText = item.title;
+        const desc = document.createElement('div'); desc.className='desc'; desc.innerText = (item.codeText.split('\n').map(l=>l.trim()).filter(Boolean)[0] || '').slice(0,140);
+        const metaDiv = document.createElement('div'); metaDiv.className='meta';
+        const left = document.createElement('div'); left.style.display='flex'; left.style.gap='10px'; left.style.alignItems='center';
+        left.appendChild(tag);
+        const inner = document.createElement('div'); inner.appendChild(title); inner.appendChild(desc);
+        left.appendChild(inner);
+        const right = document.createElement('div'); right.style.textAlign='right'; right.style.fontSize='12px'; right.style.color='var(--muted)'; right.innerText = item.idx;
+        metaDiv.appendChild(left); metaDiv.appendChild(right);
+        const cta = document.createElement('div'); cta.className='cta';
+        const viewBtn = document.createElement('button'); viewBtn.className='btn'; viewBtn.innerText='View Code';
+        viewBtn.setAttribute('data-id', `${currentLang}-${item.idx}`);
+        const copyBtn = document.createElement('button'); copyBtn.className='btn'; copyBtn.innerText='Copy';
+        copyBtn.setAttribute('data-copy', `${currentLang}-${item.idx}`);
+        cta.appendChild(viewBtn); cta.appendChild(copyBtn);
+        const codeBlock = document.createElement('pre');
+        codeBlock.className = 'code-block';
+        codeBlock.setAttribute('data-id','code-'+currentLang+'-'+item.idx);
+        card.appendChild(metaDiv); card.appendChild(cta); card.appendChild(codeBlock);
+        grid.appendChild(card);
+      });
+    });
+
+    // Mic and Camera access (require HTTPS or localhost)
+    document.getElementById('micBtn').addEventListener('click', async ()=>{
+      try{
+        await navigator.mediaDevices.getUserMedia({ audio: true });
+        alert('Microphone access granted');
+      } catch(err){
+        alert('Microphone access denied: ' + (err.message || err));
+      }
+    });
+
+    document.getElementById('camBtn').addEventListener('click', async ()=>{
+      try{
+        await navigator.mediaDevices.getUserMedia({ video: true });
+        alert('Camera access granted');
+      } catch(err){
+        alert('Camera access denied: ' + (err.message || err));
+      }
+    });
+
+    // On load: nothing shown until language clicked
+    // Optional: focus search input
+    window.addEventListener('load', ()=> document.getElementById('searchInput').focus());
+  </script>
+</body>
+</html>
